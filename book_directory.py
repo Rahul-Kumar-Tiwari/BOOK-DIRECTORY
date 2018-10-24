@@ -7,12 +7,12 @@ from tkinter.scrolledtext import ScrolledText
 import sqlite3
 # import backend
 
-conn=sqlite3.connect("directory.db")
-c=conn.cursor()
+conn=sqlite3.connect("directory.db")    #connection from database
+c=conn.cursor()                         #cursor object created
 c.execute("CREATE TABLE IF NOT EXISTS book(Title char,Author int,Year int,ISBN int)")
 
 
-def view_all():
+def view_all():                         #all book list fetching from database
     conn = sqlite3.connect("directory.db")
     c = conn.cursor()
     c.execute("select * from book");
@@ -21,7 +21,7 @@ def view_all():
         l.insert(END,row)
     conn.commit()
 
-def Search_Entry():
+def Search_Entry():                     #searching particular book from database
     conn = sqlite3.connect("directory.db")
     c = conn.cursor()
     a = entry1.get()
@@ -34,7 +34,7 @@ def Search_Entry():
         l.insert(END, row)
     conn.commit()
 
-def add_entry():
+def add_entry():                                #adding new book in database
     conn = sqlite3.connect("directory.db")
     c = conn.cursor()
     a=entry1.get()
@@ -45,7 +45,7 @@ def add_entry():
     conn.commit()
     view_all()
 
-def Update_selected():
+def Update_selected():                      #update new book details
     conn = sqlite3.connect("directory.db")
     c = conn.cursor()
     a = entry1.get()
@@ -58,7 +58,7 @@ def Update_selected():
     conn.commit()
     view_all()
 
-def delete():
+def delete():                               #delete existing book from database
     conn = sqlite3.connect("directory.db")
     c = conn.cursor()
     selection=l.curselection()
@@ -79,7 +79,7 @@ def exit():
         pass
 
 
-root=Tk()
+root=Tk()                           #main window
 root.title("Boook Directory")
 root.geometry("504x295+200+300")
 root.resizable(True,True)
